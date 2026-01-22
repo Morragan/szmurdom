@@ -8,7 +8,9 @@ export default async function Home() {
           Szmurdom
         </h1>
         <PlayButton />
-        <Houses />
+        <div className='overflow-x-auto'>
+          <Houses />
+        </div>
       </main>
     </div>
   );

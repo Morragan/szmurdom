@@ -1,11 +1,11 @@
 'use server';
 
 import { cache } from 'react';
+import { revalidatePath } from 'next/cache';
 import { sql } from './db';
 import { Offer } from './types';
 
 export const getOffers = cache(async (): Promise<Offer[]> => {
-  console.log('Fetching offers from database');
   const offers = await sql.query(`SELECT * FROM offers LIMIT 100`);
   return offers.map<Offer>((offer) => ({
     id: offer.id,
@@ -36,6 +36,7 @@ export const increaseOfferScore = async (offerId: number) => {
     SET score = score + 1
     WHERE id = ${offerId}
   `;
+  revalidatePath('/');
 };
 
 export const eliminateOffer = async (offerId: number) => {
@@ -44,6 +45,7 @@ export const eliminateOffer = async (offerId: number) => {
     SET status = 'ELIMINATED'
     WHERE id = ${offerId}
   `;
+  revalidatePath('/');
 };
 
 export const resetOffers = async () => {
@@ -52,4 +54,5 @@ export const resetOffers = async () => {
     SET score = 0,
     status = 'PERHAPS'
   `;
+  revalidatePath('/');
 };
