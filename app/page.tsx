@@ -1,4 +1,4 @@
-import { Houses, PlayButton } from './_components';
+import { Houses, PlayButton, RefreshButton } from './_components';
 
 export default async function Home() {
   return (
@@ -7,7 +7,10 @@ export default async function Home() {
         <h1 className='mb-8 text-4xl font-extrabold font-anta dark:text-white place-self-center'>
           Szmurdom
         </h1>
-        <PlayButton />
+        <div className='flex justify-center space-x-4'>
+          <PlayButton />
+          <RefreshButton />
+        </div>
         <div className='overflow-x-auto'>
           <Houses />
         </div>

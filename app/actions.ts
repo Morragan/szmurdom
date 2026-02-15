@@ -2,6 +2,12 @@
 
 import { redirect } from 'next/navigation';
 import { getOffers } from './lib/queries';
+import { revalidatePath } from 'next/cache';
+
+export const invalidateCache = async () => {
+  revalidatePath('/');
+  redirect('/');
+};
 
 export const shuffleChoices = async () => {
   const offers = await getOffers();
