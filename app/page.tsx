@@ -1,4 +1,4 @@
-import { Houses, PlayButton, RefreshButton } from './_components';
+import { Houses, PlayButton, RefreshButton, MapButton } from './_components';
 
 export default async function Home() {
   return (
@@ -10,6 +10,7 @@ export default async function Home() {
         <div className='flex justify-center space-x-4'>
           <PlayButton />
           <RefreshButton />
+          <MapButton />
         </div>
         <div className='overflow-x-auto'>
           <Houses />

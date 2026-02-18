@@ -13,6 +13,8 @@ export const getOffers = cache(async (): Promise<Offer[]> => {
     imageUrl: offer.image_link,
     score: offer.score,
     status: offer.status,
+    lat: offer.lat,
+    lon: offer.lon,
   }));
 });
 
@@ -27,6 +29,8 @@ export const getOffersByIds = cache(async (ids: number[]): Promise<Offer[]> => {
     imageUrl: offer.image_link,
     score: offer.score,
     status: offer.status,
+    lat: offer.lat,
+    lon: offer.lon,
   }));
 });
 

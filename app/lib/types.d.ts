@@ -4,4 +4,6 @@ export type Offer = {
   imageUrl: string;
   score: number;
   status: 'PERHAPS' | 'ELIMINATED';
+  lat: number;
+  lon: number;
 };
