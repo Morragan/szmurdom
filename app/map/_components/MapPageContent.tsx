@@ -27,13 +27,15 @@ export default function MapPageContent({ offers }: { offers: Offer[] }) {
     <>
       <Map offers={displayedOffers} />
       <hr className='mt-8 mb-8 border-gray-300 dark:border-gray-700' />
-      <HouseSelector
-        offers={offers}
-        selectedIds={selectedIds}
-        onSelectionChange={setSelectedIds}
-        showEliminated={showEliminated}
-        onToggleEliminated={setShowEliminated}
-      />
+      <div className='px-4 md:px-0'>
+        <HouseSelector
+          offers={offers}
+          selectedIds={selectedIds}
+          onSelectionChange={setSelectedIds}
+          showEliminated={showEliminated}
+          onToggleEliminated={setShowEliminated}
+        />
+      </div>
     </>
   );
 }

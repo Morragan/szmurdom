@@ -67,41 +67,43 @@ export default function Map({ offers }: { offers: Offer[] }) {
   }
 
   return (
-    <MapContainer
-      center={[avgLat, avgLon]}
-      zoom={13}
-      style={{ height: '600px', width: '100%' }}
-      className='rounded-lg shadow-lg z-0'
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      />
-      {validOffers.map((offer) => (
-        <Marker
-          key={offer.id}
-          position={[offer.lat, offer.lon]}
-          icon={markerIcon}
-        >
-          <Popup minWidth={260} maxWidth={325}>
-            <div className='text-center'>
-              <a
-                href={offer.link}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm mb-2 block'
-              >
-                View Offer
-              </a>
-              <img
-                src={offer.imageUrl}
-                alt={`House ${offer.id}`}
-                className='h-auto rounded'
-              />
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <div className='w-full px-0 [@media(orientation:landscape)]:px-4 md:[@media(orientation:landscape)]:px-0'>
+      <MapContainer
+        center={[avgLat, avgLon]}
+        zoom={13}
+        style={{ height: '400px', width: '100%' }}
+        className='h-[400px] md:h-[600px] lg:h-[700px] rounded-lg shadow-lg z-0'
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+        {validOffers.map((offer) => (
+          <Marker
+            key={offer.id}
+            position={[offer.lat, offer.lon]}
+            icon={markerIcon}
+          >
+            <Popup minWidth={260} maxWidth={325}>
+              <div className='text-center'>
+                <a
+                  href={offer.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm mb-2 block'
+                >
+                  View Offer
+                </a>
+                <img
+                  src={offer.imageUrl}
+                  alt={`House ${offer.id}`}
+                  className='h-auto rounded'
+                />
+              </div>
+            </Popup>
+          </Marker>
+        ))}
+      </MapContainer>
+    </div>
   );
 }

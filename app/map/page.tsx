@@ -7,7 +7,7 @@ export default async function MapPage() {
 
   return (
     <div className='min-h-screen dark:bg-gray-900 dark:text-gray-200'>
-      <main className='w-full py-8 px-16'>
+      <main className='w-full py-8 px-4 md:px-16'>
         <div className='flex items-center justify-between mb-8'>
           <h1 className='text-4xl font-extrabold font-anta dark:text-white'>
             House Locations
@@ -19,7 +19,9 @@ export default async function MapPage() {
             Back to Home
           </Link>
         </div>
-        <MapPageContent offers={offers} />
+        <div className='-mx-4 md:mx-0'>
+          <MapPageContent offers={offers} />
+        </div>
       </main>
     </div>
   );
