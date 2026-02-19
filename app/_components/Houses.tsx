@@ -1,4 +1,5 @@
 import { getOffers } from '../lib/queries';
+import { NotesButton } from './NotesButton';
 
 export const Houses = async () => {
   const houses = await getOffers();
@@ -13,6 +14,9 @@ export const Houses = async () => {
       <table className='min-w-[700px] w-[90vw] mx-auto dark:bg-gray-800 font-semibold text-center rounded-sm overflow-hidden'>
         <thead>
           <tr className='bg-zinc-50 dark:bg-gray-800 border-gray-300 dark:border-gray-700'>
+            <th className='px-2 py-2 border border-inherit border-b-0 w-12'>
+              Notes
+            </th>
             <th className='px-4 py-2 border border-inherit border-b-0'>
               Offer
             </th>
@@ -37,6 +41,9 @@ export const Houses = async () => {
                         hover:border-gray-400
                         dark:hover:border-gray-600'
             >
+              <td className='border border-inherit px-2'>
+                <NotesButton offerId={house.id} initialNotes={house.notes} />
+              </td>
               <td className='border border-inherit font-normal'>
                 <a
                   target='_blank'

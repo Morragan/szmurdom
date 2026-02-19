@@ -6,4 +6,5 @@ export type Offer = {
   status: 'PERHAPS' | 'ELIMINATED';
   lat: number;
   lon: number;
+  notes: string | null;
 };

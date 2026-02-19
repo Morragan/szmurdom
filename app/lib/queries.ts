@@ -15,6 +15,7 @@ export const getOffers = cache(async (): Promise<Offer[]> => {
     status: offer.status,
     lat: offer.lat,
     lon: offer.lon,
+    notes: offer.notes,
   }));
 });
 
@@ -31,6 +32,7 @@ export const getOffersByIds = cache(async (ids: number[]): Promise<Offer[]> => {
     status: offer.status,
     lat: offer.lat,
     lon: offer.lon,
+    notes: offer.notes,
   }));
 });
 
@@ -57,6 +59,15 @@ export const resetOffers = async () => {
     UPDATE offers
     SET score = 0,
     status = 'PERHAPS'
+  `;
+  revalidatePath('/');
+};
+
+export const updateOfferNotes = async (offerId: number, notes: string) => {
+  await sql`
+    UPDATE offers
+    SET notes = ${notes}
+    WHERE id = ${offerId}
   `;
   revalidatePath('/');
 };
