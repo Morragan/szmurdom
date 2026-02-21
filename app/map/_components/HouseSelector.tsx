@@ -8,6 +8,7 @@ type HouseSelectorProps = {
   onSelectionChange: (ids: Set<number>) => void;
   showEliminated: boolean;
   onToggleEliminated: (show: boolean) => void;
+  onHoverChange: (id: number | null) => void;
 };
 
 export default function HouseSelector({
@@ -16,6 +17,7 @@ export default function HouseSelector({
   onSelectionChange,
   showEliminated,
   onToggleEliminated,
+  onHoverChange,
 }: HouseSelectorProps) {
   const handleToggleAll = () => {
     const validOffers = offers.filter(
@@ -80,6 +82,8 @@ export default function HouseSelector({
                 ? 'bg-blue-100 dark:bg-blue-900'
                 : 'bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600'
             } ${offer.status === 'ELIMINATED' ? 'opacity-60' : ''}`}
+            onMouseEnter={() => onHoverChange(offer.id)}
+            onMouseLeave={() => onHoverChange(null)}
           >
             <input
               type='checkbox'

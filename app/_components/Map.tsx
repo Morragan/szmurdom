@@ -24,7 +24,24 @@ const markerIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-export default function Map({ offers }: { offers: Offer[] }) {
+const highlightedMarkerIcon = new L.Icon({
+  iconUrl:
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+export default function Map({
+  offers,
+  hoveredId,
+}: {
+  offers: Offer[];
+  hoveredId: number | null;
+}) {
   const [mounted, setMounted] = useState(false);
 
   const validOffers = useMemo(
@@ -50,7 +67,7 @@ export default function Map({ offers }: { offers: Offer[] }) {
 
   if (!mounted) {
     return (
-      <div className='w-full h-[600px] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center'>
+      <div className='w-full h-[400px] md:h-[600px] lg:h-[800px] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center'>
         <p className='text-gray-600 dark:text-gray-400'>Loading map...</p>
       </div>
     );
@@ -58,7 +75,7 @@ export default function Map({ offers }: { offers: Offer[] }) {
 
   if (validOffers.length === 0) {
     return (
-      <div className='w-full h-[600px] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center'>
+      <div className='w-full h-[400px] md:h-[600px] lg:h-[800px] bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center'>
         <p className='text-gray-600 dark:text-gray-400'>
           No houses with location data found.
         </p>
@@ -71,8 +88,7 @@ export default function Map({ offers }: { offers: Offer[] }) {
       <MapContainer
         center={[avgLat, avgLon]}
         zoom={13}
-        style={{ height: '400px', width: '100%' }}
-        className='h-[400px] md:h-[600px] lg:h-[700px] rounded-lg shadow-lg z-0'
+        className='h-[400px] md:h-[600px] lg:h-[800px] rounded-lg shadow-lg z-0'
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -82,7 +98,7 @@ export default function Map({ offers }: { offers: Offer[] }) {
           <Marker
             key={offer.id}
             position={[offer.lat, offer.lon]}
-            icon={markerIcon}
+            icon={offer.id === hoveredId ? highlightedMarkerIcon : markerIcon}
           >
             <Popup minWidth={260} maxWidth={325}>
               <div className='text-center'>

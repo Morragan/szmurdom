@@ -9,6 +9,7 @@ const Map = dynamic(() => import('@/app/_components/Map'), { ssr: false });
 
 export default function MapPageContent({ offers }: { offers: Offer[] }) {
   const [showEliminated, setShowEliminated] = useState(false);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   const initialSelected = useMemo(() => {
     const validOffers = offers.filter(
@@ -25,7 +26,7 @@ export default function MapPageContent({ offers }: { offers: Offer[] }) {
 
   return (
     <>
-      <Map offers={displayedOffers} />
+      <Map offers={displayedOffers} hoveredId={hoveredId} />
       <hr className='mt-8 mb-8 border-gray-300 dark:border-gray-700' />
       <div className='px-4 md:px-0'>
         <HouseSelector
@@ -34,6 +35,7 @@ export default function MapPageContent({ offers }: { offers: Offer[] }) {
           onSelectionChange={setSelectedIds}
           showEliminated={showEliminated}
           onToggleEliminated={setShowEliminated}
+          onHoverChange={setHoveredId}
         />
       </div>
     </>

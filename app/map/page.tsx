@@ -2,6 +2,8 @@ import { getOffers } from '../lib/queries';
 import MapPageContent from './_components/MapPageContent';
 import Link from 'next/link';
 
+export const revalidate = 0;
+
 export default async function MapPage() {
   const offers = await getOffers();
 
